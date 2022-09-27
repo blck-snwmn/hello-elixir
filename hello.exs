@@ -24,3 +24,15 @@ kl = [a: 2, b: "qaaa"] ++ [c: true]
 IO.puts(kl[:a])
 IO.puts(kl[:b])
 IO.puts(kl[:c])
+
+defmodule Fib do
+  def f(n) when n > 1 do
+    f(n - 1) + f(n - 2)
+  end
+
+  def f(1), do: 1
+
+  def f(0), do: 0
+end
+
+IO.puts(Fib.f(10))
