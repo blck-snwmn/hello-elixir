@@ -36,3 +36,28 @@ defmodule Fib do
 end
 
 IO.puts(Fib.f(10))
+
+defmodule Sum do
+  def list([head | tail], acc) do
+    list(tail, head + acc)
+  end
+
+  def list([], acc) do
+    acc
+  end
+
+  def list([head | tail]) do
+    list(tail, head)
+  end
+
+  def list([]) do
+    0
+  end
+end
+
+IO.puts(Sum.list([10, 2, 1, 100]))
+IO.puts(Sum.list([10]))
+IO.puts(Sum.list([]))
+IO.puts(Enum.reduce([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, fn x, acc -> x + acc end))
+IO.puts(Enum.reduce([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn x, acc -> x + acc end))
+IO.inspect(Enum.map([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn x -> x + 2 end))
