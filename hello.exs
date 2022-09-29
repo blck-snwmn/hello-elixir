@@ -61,3 +61,6 @@ IO.puts(Sum.list([]))
 IO.puts(Enum.reduce([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, fn x, acc -> x + acc end))
 IO.puts(Enum.reduce([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn x, acc -> x + acc end))
 IO.inspect(Enum.map([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn x -> x + 2 end))
+
+1..10_000 |> Enum.filter(&(&1 < 10)) |> IO.inspect() |> Sum.list() |> IO.puts()
+
