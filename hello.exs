@@ -76,3 +76,37 @@ IO.inspect(
   end
 )
 
+defmodule KV do
+  def start_link do
+    Task.start_link(fn -> loop(%{}) end)
+  end
+
+  defp loop(map) do
+    receive do
+      {:get, key, caller} ->
+        IO.puts("[get]receive #{Map.get(map, key)}")
+
+        send(caller, {:ok, Map.get(map, key)})
+        loop(map)
+
+      {:put, key, value} ->
+        IO.puts("[put]receive")
+        loop(Map.put(map, key, value))
+    end
+  end
+end
+
+{:ok, pid} = KV.start_link()
+
+send(pid, {:put, :hello, 10})
+send(pid, {:get, :hello, self()})
+
+IO.puts("send")
+
+IO.inspect(
+  receive do
+    {msg} -> msg
+    {:ok, msg} -> "received: #{msg}"
+    other -> other
+  end
+)
