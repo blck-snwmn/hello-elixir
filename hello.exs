@@ -64,3 +64,15 @@ IO.inspect(Enum.map([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn x -> x + 2 end))
 
 1..10_000 |> Enum.filter(&(&1 < 10)) |> IO.inspect() |> Sum.list() |> IO.puts()
 
+pid = spawn(fn -> 1 + 2 end)
+IO.inspect(Process.alive?(pid))
+
+send(self(), {:hello, "world"})
+
+IO.inspect(
+  receive do
+    {:hello, msg} -> msg
+    {:world, _msg} -> "won't match"
+  end
+)
+
